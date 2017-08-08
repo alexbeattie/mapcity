@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		8E02BE7A1F3A456700BF9382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02BE791F3A456700BF9382 /* AppDelegate.swift */; };
-		8E02BE7C1F3A456700BF9382 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02BE7B1F3A456700BF9382 /* ViewController.swift */; };
+		8E02BE7C1F3A456700BF9382 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02BE7B1F3A456700BF9382 /* MapVC.swift */; };
 		8E02BE7F1F3A456700BF9382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E02BE7D1F3A456700BF9382 /* Main.storyboard */; };
 		8E02BE811F3A456700BF9382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E02BE801F3A456700BF9382 /* Assets.xcassets */; };
 		8E02BE841F3A456700BF9382 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E02BE821F3A456700BF9382 /* LaunchScreen.storyboard */; };
+		8E7105301F3A686E007F6778 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E71052F1F3A686E007F6778 /* DroppablePin.swift */; };
+		9D03E1544202E051B893081F /* Pods_mapcity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370BADFC74A4D7FC6889ACEF /* Pods_mapcity.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370BADFC74A4D7FC6889ACEF /* Pods_mapcity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mapcity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E02BE761F3A456700BF9382 /* mapcity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapcity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E02BE791F3A456700BF9382 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8E02BE7B1F3A456700BF9382 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8E02BE7B1F3A456700BF9382 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		8E02BE7E1F3A456700BF9382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E02BE801F3A456700BF9382 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E02BE831F3A456700BF9382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E02BE851F3A456700BF9382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E71052F1F3A686E007F6778 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
+		A5F899AA9DD46D129C26A8E5 /* Pods-mapcity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapcity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mapcity/Pods-mapcity.debug.xcconfig"; sourceTree = "<group>"; };
+		C9C3B055349DD4CB52790447 /* Pods-mapcity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapcity.release.xcconfig"; path = "Pods/Target Support Files/Pods-mapcity/Pods-mapcity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D03E1544202E051B893081F /* Pods_mapcity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				8E02BE781F3A456700BF9382 /* mapcity */,
 				8E02BE771F3A456700BF9382 /* Products */,
+				944F85338793FA1A5C608980 /* Pods */,
+				B35F9B7716E6EA9A8D733033 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +63,64 @@
 		8E02BE781F3A456700BF9382 /* mapcity */ = {
 			isa = PBXGroup;
 			children = (
+				8E02BE8E1F3A45A100BF9382 /* Utilities */,
+				8E02BE8D1F3A459800BF9382 /* Extensions */,
+				8E02BE8C1F3A459000BF9382 /* View */,
+				8E02BE8B1F3A458900BF9382 /* Controller */,
 				8E02BE791F3A456700BF9382 /* AppDelegate.swift */,
-				8E02BE7B1F3A456700BF9382 /* ViewController.swift */,
 				8E02BE7D1F3A456700BF9382 /* Main.storyboard */,
 				8E02BE801F3A456700BF9382 /* Assets.xcassets */,
 				8E02BE821F3A456700BF9382 /* LaunchScreen.storyboard */,
 				8E02BE851F3A456700BF9382 /* Info.plist */,
 			);
 			path = mapcity;
+			sourceTree = "<group>";
+		};
+		8E02BE8B1F3A458900BF9382 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E02BE7B1F3A456700BF9382 /* MapVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8E02BE8C1F3A459000BF9382 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E71052F1F3A686E007F6778 /* DroppablePin.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E02BE8D1F3A459800BF9382 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8E02BE8E1F3A45A100BF9382 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		944F85338793FA1A5C608980 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A5F899AA9DD46D129C26A8E5 /* Pods-mapcity.debug.xcconfig */,
+				C9C3B055349DD4CB52790447 /* Pods-mapcity.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B35F9B7716E6EA9A8D733033 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				370BADFC74A4D7FC6889ACEF /* Pods_mapcity.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +130,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E02BE881F3A456700BF9382 /* Build configuration list for PBXNativeTarget "mapcity" */;
 			buildPhases = (
+				99D193E54E8901E2E487A755 /* [CP] Check Pods Manifest.lock */,
 				8E02BE721F3A456700BF9382 /* Sources */,
 				8E02BE731F3A456700BF9382 /* Frameworks */,
 				8E02BE741F3A456700BF9382 /* Resources */,
+				BA1EAAFE85FCBFDB0D5073B1 /* [CP] Embed Pods Frameworks */,
+				0A58050D37E47BA09452182A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +192,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A58050D37E47BA09452182A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mapcity/Pods-mapcity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99D193E54E8901E2E487A755 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BA1EAAFE85FCBFDB0D5073B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mapcity/Pods-mapcity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8E02BE721F3A456700BF9382 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E02BE7C1F3A456700BF9382 /* ViewController.swift in Sources */,
+				8E02BE7C1F3A456700BF9382 /* MapVC.swift in Sources */,
+				8E7105301F3A686E007F6778 /* DroppablePin.swift in Sources */,
 				8E02BE7A1F3A456700BF9382 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,9 +382,12 @@
 		};
 		8E02BE891F3A456700BF9382 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5F899AA9DD46D129C26A8E5 /* Pods-mapcity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LR4SP9C264;
 				INFOPLIST_FILE = mapcity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artisanbranding.com.mapcity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -284,9 +398,12 @@
 		};
 		8E02BE8A1F3A456700BF9382 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9C3B055349DD4CB52790447 /* Pods-mapcity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LR4SP9C264;
 				INFOPLIST_FILE = mapcity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artisanbranding.com.mapcity;
 				PRODUCT_NAME = "$(TARGET_NAME)";

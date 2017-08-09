@@ -33,7 +33,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     var collectionView: UICollectionView?
     
     var imageUrlArray = [String]()
-    
+    var imageAray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +76,8 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func animateViewDown() {
+        cancelAllSessions()
+
         pullUpViewHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -146,6 +148,7 @@ extension MapVC: MKMapViewDelegate {
         removePin()
         removeSpinner()
         removeProgressLabel()
+        cancelAllSessions()
         
         animateViewUp()
         addSwipe()
@@ -164,10 +167,19 @@ extension MapVC: MKMapViewDelegate {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2)
         mapView.setRegion(coordinateRegion, animated: true)
         
-        retrieveUrls(forAnnotation: annotation) { (true) in
-            print(self.imageUrlArray)
+        retrieveUrls(forAnnotation: annotation) { (finished) in
+            // print(self.imageUrlArray)
+            if finished {
+                self.retrieveImages(handler: { (finished) in
+                    // hide spinner
+                    self.removeSpinner()
+                    // hide label
+                    self.removeProgressLabel()
+                    // reload collectionview
+                    
+                })
+            }
         }
-        
     }
     func removePin() {
         for annotation in mapView.annotations {
@@ -195,7 +207,30 @@ extension MapVC: MKMapViewDelegate {
                 self.imageUrlArray.append(postUrl)
             }
             handler(true)
-        }        
+        }
+    }
+    func retrieveImages(handler: @escaping (_ status: Bool) -> ()) {
+        imageAray = []
+        
+        for url in imageUrlArray {
+            Alamofire.request(url).responseImage(completionHandler: { (response) in
+                guard let image = response.result.value else { return }
+                self.imageAray.append(image)
+                
+                self.progressLabel?.text = "\(self.imageAray.count)/40 IMAGES DOWNLOADED"
+                
+                // this is a check to make sure that the urls match the number of images
+                if self.imageAray.count == self.imageUrlArray.count {
+                    handler(true)
+                }
+            })
+        }
+    }
+    func cancelAllSessions() {
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+            sessionDataTask.forEach({ $0.cancel() })
+            downloadData.forEach({ $0.cancel() })
+        }
     }
 }
 extension MapVC: CLLocationManagerDelegate {

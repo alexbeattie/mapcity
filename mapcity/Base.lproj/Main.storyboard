@@ -4,8 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SW2-VH-VxP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzh-7Q-oDF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -50,36 +50,46 @@
                                     <constraint firstAttribute="height" constant="70" id="e31-jd-3mR"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irG-6M-1yM">
-                                <rect key="frame" x="288" y="580" width="50" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xze-UT-zx7">
+                                <rect key="frame" x="0.0" y="666" width="375" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="8ZO-HT-4Wb"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irG-6M-1yM">
+                                <rect key="frame" x="305" y="596" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="HZQ-6G-Vzs"/>
+                                    <constraint firstAttribute="height" constant="50" id="m9Q-YL-4tJ"/>
+                                </constraints>
                                 <state key="normal" image="locationButton"/>
                                 <connections>
                                     <action selector="centerMapButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1dl-rR-LDZ"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xze-UT-zx7">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bzh-7Q-oDF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8ii-FV-h2f"/>
                             <constraint firstItem="xze-UT-zx7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TB5-WF-CLU"/>
                             <constraint firstItem="SW2-VH-VxP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ZZM-yb-MzM"/>
+                            <constraint firstAttribute="bottom" secondItem="xze-UT-zx7" secondAttribute="bottom" constant="-1" id="arc-D1-DFH"/>
                             <constraint firstItem="bzh-7Q-oDF" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="b7A-3S-z1A"/>
                             <constraint firstItem="SW2-VH-VxP" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="dct-wb-7i5"/>
                             <constraint firstItem="xze-UT-zx7" firstAttribute="top" secondItem="SW2-VH-VxP" secondAttribute="bottom" id="dq0-iG-PVF"/>
-                            <constraint firstItem="dGH-Sh-SYl" firstAttribute="top" secondItem="irG-6M-1yM" secondAttribute="bottom" constant="37" id="eBU-ML-vYH"/>
+                            <constraint firstItem="xze-UT-zx7" firstAttribute="top" secondItem="irG-6M-1yM" secondAttribute="bottom" constant="20" id="eBU-ML-vYH"/>
                             <constraint firstItem="bzh-7Q-oDF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eQ9-IA-kMn"/>
                             <constraint firstAttribute="trailing" secondItem="xze-UT-zx7" secondAttribute="trailing" id="f6o-66-5XZ"/>
                             <constraint firstItem="SW2-VH-VxP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hzO-D4-6dm"/>
-                            <constraint firstAttribute="trailing" secondItem="irG-6M-1yM" secondAttribute="trailing" constant="37" id="kfQ-BI-UVg"/>
-                            <constraint firstItem="xze-UT-zx7" firstAttribute="top" secondItem="dGH-Sh-SYl" secondAttribute="bottom" id="otK-Qw-eyV"/>
+                            <constraint firstAttribute="trailing" secondItem="irG-6M-1yM" secondAttribute="trailing" constant="20" id="kfQ-BI-UVg"/>
+                            <constraint firstAttribute="bottom" secondItem="xze-UT-zx7" secondAttribute="bottom" id="yQF-d1-aEn"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="SW2-VH-VxP" id="Fh3-g9-ge4"/>
+                        <outlet property="pullUpView" destination="xze-UT-zx7" id="q3D-JQ-8zq"/>
+                        <outlet property="pullUpViewHeightConstraint" destination="8ZO-HT-4Wb" id="VgP-zp-sNV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

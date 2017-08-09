@@ -26,7 +26,9 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     var spinner : UIActivityIndicatorView!
     var progressLabel: UILabel?
     
-    
+    // when you programmatically set up UICollectionView you must give the UICollectionViewFlowLayout
+    var flowLayout = UICollectionViewFlowLayout()
+    var collectionView: UICollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,15 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         locationManager.delegate = self
         configureLocationServices()
         addDoubleTap()
+        
+        //begin programattic setup of UICollectionView
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
+        collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell")
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        pullUpView.addSubview(collectionView!)
+        
     }
 
     func addDoubleTap() {
@@ -70,12 +81,36 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         spinner = UIActivityIndicatorView()
         spinner?.center = CGPoint(x: (screenSize.width / 2) - ((spinner?.frame.width)! / 2), y: 150)
         spinner?.activityIndicatorViewStyle = .whiteLarge
-        spinner?.color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        spinner?.color = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         spinner?.startAnimating()
-        pullUpView.addSubview(spinner!)
+        collectionView?.addSubview(spinner!)
     }
-    
-    
+    func removeSpinner() {
+        
+        // IF THERE IS A SPINNER!!! THAT IS WHAT "if spinner != nil" means
+        if spinner != nil {
+            spinner?.removeFromSuperview()
+        }
+    }
+    func removeProgressLabel() {
+        if progressLabel != nil {
+            progressLabel?.removeFromSuperview()
+        }
+    }
+    func addProgressLabel() {
+        
+        // Instantiate progressLabell like this ↓
+        //when you want to set the view up the way you want it!
+        //☟⬇︎
+        
+        progressLabel = UILabel()
+        progressLabel?.frame = CGRect(x: (screenSize.width / 2) - 120, y: 175, width: 240, height: 40)
+        progressLabel?.font = UIFont(name: "Avenire Next", size: 18)
+        progressLabel?.textColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        progressLabel?.textAlignment = .center
+        // progressLabel?.text = "12/40 PHOTOS LOADED"
+        collectionView?.addSubview(progressLabel!)
+    }
     @IBAction func centerMapButtonWasPressed(_ sender: Any) {
         if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
             centerMapOnUserLocation()
@@ -104,12 +139,14 @@ extension MapVC: MKMapViewDelegate {
     @objc func dropPin(sender:UIGestureRecognizer) {
 
         removePin()
+        removeSpinner()
+        removeProgressLabel()
         
         animateViewUp()
-        
         addSwipe()
-        
         addSpinner()
+        addProgressLabel()
+        
         //converts tap to point on view
         let touchPoint = sender.location(in: mapView)
 
@@ -142,3 +179,50 @@ extension MapVC: CLLocationManagerDelegate {
         centerMapOnUserLocation()
     }
 }
+
+extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // number of items in array
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell
+        cell?.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return cell!
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

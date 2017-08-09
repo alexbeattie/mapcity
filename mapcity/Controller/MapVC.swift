@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import AlamofireImage
 
 class MapVC: UIViewController, UIGestureRecognizerDelegate {
 
@@ -29,6 +31,9 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     // when you programmatically set up UICollectionView you must give the UICollectionViewFlowLayout
     var flowLayout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView?
+    
+    var imageUrlArray = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,25 +151,51 @@ extension MapVC: MKMapViewDelegate {
         addSwipe()
         addSpinner()
         addProgressLabel()
-        
+       
         //converts tap to point on view
         let touchPoint = sender.location(in: mapView)
 
         //converts point to GPS coordinates
         let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        
+//        print(touchCoordinate)
         let annotation = DroppablePin(coordinate: touchCoordinate, identifier: "droppablePin")
         mapView.addAnnotation(annotation)
         
-        
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2)
         mapView.setRegion(coordinateRegion, animated: true)
+        
+        retrieveUrls(forAnnotation: annotation) { (true) in
+            print(self.imageUrlArray)
+        }
         
     }
     func removePin() {
         for annotation in mapView.annotations {
             mapView.removeAnnotation(annotation)
         }
+    }
+    
+    func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping (_ status: Bool) -> ()) {
+        imageUrlArray = []
+        
+        // Begin AlamoFire
+        
+        Alamofire.request(flickrUrl(forApiKey: apiKey, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
+            
+            // once you parse the json, you need to find out what the response is... in this case it begins with: '{' - which is a Dictionary...
+            //print(response)
+            //handler(true)
+            
+            guard let json = response.result.value as? Dictionary<String, AnyObject> else { return }
+            //print(json) - to check if response is "ok"
+            let photosDict = json["photos"] as! Dictionary<String, AnyObject>
+            let photosDictArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
+            for photo in photosDictArray {
+                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                self.imageUrlArray.append(postUrl)
+            }
+            handler(true)
+        }        
     }
 }
 extension MapVC: CLLocationManagerDelegate {
